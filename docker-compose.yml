@@ -1,0 +1,16 @@
+version: '3.4'
+
+services:
+  crayonweb.api:
+    image: ${DOCKER_REGISTRY-}crayonwebapi
+    build:
+      context: .
+      dockerfile: CrayonWeb.Api/Dockerfile
+  db:
+    image: mcr.microsoft.com/mssql/server:2022-latest
+    environment:
+      - SA_PASSWORD=Pass@word
+      - ACCEPT_EULA=Y
+    ports:
+      - "5434:1433"
+    

@@ -8,6 +8,7 @@ namespace CrayonWeb.Api.Dto
         public AutoMapperProfile()
         {
             CreateMap<Account, AccountDto>();
+            CreateMap<Purchase, PurchaseDto>();
         }
     }
 }

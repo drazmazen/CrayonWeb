@@ -4,6 +4,7 @@ using CrayonWeb.Api.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace CrayonWeb.Api.Migrations
 {
     [DbContext(typeof(CrayonDbContext))]
-    partial class CrayonDbContextModelSnapshot : ModelSnapshot
+    [Migration("20230713170127_AddPurchasesCcpReference")]
+    partial class AddPurchasesCcpReference
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

@@ -9,33 +9,33 @@ namespace CrayonWeb.Api.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class CustomersController : ControllerBase
+    public class AccountsController : ControllerBase
     {
-        private readonly ILogger<CustomersController> _logger;
+        private readonly ILogger<AccountsController> _logger;
         private readonly CrayonDbContext _dbContext;
         private readonly IMapper _mapper;
-        public CustomersController(ILogger<CustomersController> logger, CrayonDbContext dbContext, IMapper mapper)
+
+        public AccountsController(ILogger<AccountsController> logger, CrayonDbContext dbContext, IMapper mapper)
         {
             _logger = logger;
             _dbContext = dbContext;
             _mapper = mapper;
         }
-
         [HttpGet]
-        [Route("{id}/accounts")]
-        public ActionResult<IEnumerable<AccountDto>> GetAccounts(int id)
+        [Route("{id}/purchases")]
+        public ActionResult<IEnumerable<PurchaseDto>> GetPurchases(int id) 
         {
             try
             {
-                var customer = _dbContext.Customers
-                        .Include(c => c.Accounts)
-                        .FirstOrDefault(c => c.Id == id);
-                if (customer == null)
+                var account = _dbContext.Accounts
+                        .Include(a => a.Purchases)
+                        .FirstOrDefault(a => a.Id == id);
+                if (account == null)
                 {
                     return NotFound();
                 }
-                var accountDtos = customer.Accounts.Select(a => _mapper.Map<AccountDto>(a)).ToList();
-                return Ok(accountDtos);
+                var purchaseDtos = account.Purchases.Select(p => _mapper.Map<PurchaseDto>(p)).ToList();
+                return Ok(purchaseDtos);
             }
             catch (Exception ex)
             {

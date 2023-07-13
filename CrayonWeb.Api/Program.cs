@@ -1,3 +1,4 @@
+using CrayonWeb.Api.CCP;
 using CrayonWeb.Api.Models;
 using Microsoft.EntityFrameworkCore;
 
@@ -9,11 +10,13 @@ builder.Services.AddControllers();
 var connString = builder.Configuration.GetConnectionString("CrayonDb");
 builder.Services.AddDbContext<CrayonDbContext>(option => option.UseSqlServer(connString));
 
+
 builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 
-// Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+
+builder.Services.AddScoped<ICcpClient, CcpClientDev>();
 
 var app = builder.Build();
 
@@ -25,6 +28,10 @@ if (app.Environment.IsDevelopment())
 
     //if we are in the dev environment, migrate db and populate some data
     DevDb.Populate(app);
+}
+else
+{
+    builder.Services.AddScoped<ICcpClient, CcpClientProd>();
 }
 
 app.UseHttpsRedirection();

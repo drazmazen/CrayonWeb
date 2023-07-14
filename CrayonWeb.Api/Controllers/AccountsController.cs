@@ -34,7 +34,7 @@ namespace CrayonWeb.Api.Controllers
                 {
                     return NotFound();
                 }
-                var purchaseDtos = account.Purchases.Select(p => _mapper.Map<PurchaseDto>(p)).ToList();
+                var purchaseDtos = account.Purchases.Where(p => p.IsActive).Select(p => _mapper.Map<PurchaseDto>(p)).ToList();
                 return Ok(purchaseDtos);
             }
             catch (Exception ex)

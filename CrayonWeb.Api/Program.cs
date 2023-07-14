@@ -12,11 +12,21 @@ builder.Services.AddDbContext<CrayonDbContext>(option => option.UseSqlServer(con
 
 
 builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
-
+builder.Services.AddHttpClient();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
-builder.Services.AddScoped<ICcpClient, CcpClientDev>();
+var useCcpClientProd = builder.Configuration.GetValue<bool>("Ccp:UseCcpClientProd");
+
+if (useCcpClientProd)
+{
+    builder.Services.AddScoped<ICcpClient, CcpClientProd>();
+}
+else
+{
+    builder.Services.AddScoped<ICcpClient, CcpClientDev>();
+}
+
 
 var app = builder.Build();
 
@@ -29,14 +39,9 @@ if (app.Environment.IsDevelopment())
     //if we are in the dev environment, migrate db and populate some data
     DevDb.Populate(app);
 }
-else
-{
-    builder.Services.AddScoped<ICcpClient, CcpClientProd>();
-}
 
 app.UseHttpsRedirection();
 app.UseRouting();
-//app.UseAuthorization();
 app.UseEndpoints(endpoints => endpoints.MapControllers());   
 
 app.Run();

@@ -121,7 +121,7 @@ namespace CrayonWeb.Api.Controllers
                 {
                     return BadRequest("Order quantity has to be at least 1");
                 }
-                var purchase = _dbContext.Purchases.Find(id);
+                var purchase = _dbContext.Purchases.FirstOrDefault(p => p.Id == id && p.IsActive);
                 if (purchase == null)
                 {
                     return NotFound($"Purchase not found for id {id}");
@@ -155,7 +155,7 @@ namespace CrayonWeb.Api.Controllers
         {
             try
             {
-                var purchase = _dbContext.Purchases.Find(id);
+                var purchase = _dbContext.Purchases.FirstOrDefault(p => p.Id == id && p.IsActive);
                 if (purchase == null)
                 {
                     return NotFound($"Purchase not found for id {id}");

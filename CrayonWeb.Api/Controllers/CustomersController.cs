@@ -34,7 +34,7 @@ namespace CrayonWeb.Api.Controllers
                 {
                     return NotFound();
                 }
-                var accountDtos = customer.Accounts.Select(a => _mapper.Map<AccountDto>(a)).ToList();
+                var accountDtos = customer.Accounts?.Select(a => _mapper.Map<AccountDto>(a)).ToList();
                 return Ok(accountDtos);
             }
             catch (Exception ex)

@@ -44,6 +44,10 @@ namespace CrayonWeb.Api.Controllers
         {
             try
             {
+                if (inputDto.Quantity < 1)
+                {
+                    return BadRequest("Order quantity has to be at least 1");
+                }
                 var account = _dbContext.Accounts.Find(inputDto.AccountId);
                 if (account == null)
                 {
@@ -113,6 +117,10 @@ namespace CrayonWeb.Api.Controllers
         {
             try
             {
+                if (newQuantity < 1)
+                {
+                    return BadRequest("Order quantity has to be at least 1");
+                }
                 var purchase = _dbContext.Purchases.Find(id);
                 if (purchase == null)
                 {

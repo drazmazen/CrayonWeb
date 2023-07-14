@@ -61,5 +61,30 @@ namespace CrayonWeb.Api.CCP
                 ErrorMessage = string.Empty
             };
         }
+
+        public OrderResultDto OrderSync(string Id, int quantity)
+        {
+            var software = _softwareList.Where(p => p.Id == Id).FirstOrDefault();
+            if (software == null)
+            {
+                return new OrderResultDto
+                {
+                    OrderReference = string.Empty,
+                    Name = string.Empty,
+                    ValidTo = DateTime.MinValue,
+                    Success = false,
+                    ErrorMessage = "Unknown software id"
+                };
+            }
+
+            return new OrderResultDto
+            {
+                OrderReference = Guid.NewGuid().ToString(),
+                Name = software.Name,
+                Success = true,
+                ValidTo = DateTime.Now.AddYears(1),
+                ErrorMessage = string.Empty
+            };
+        }
     }
 }

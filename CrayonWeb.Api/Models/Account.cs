@@ -6,6 +6,6 @@
         public string Name { get; set; }
         public int CustomerId { get; set; }
         public Customer Customer { get; set; }
-        public ICollection<Purchase> Purchases { get; set; }
+        public virtual ICollection<Purchase> Purchases { get; set; }
     }
 }

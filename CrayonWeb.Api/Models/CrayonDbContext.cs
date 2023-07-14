@@ -9,9 +9,14 @@ namespace CrayonWeb.Api.Models
             
         }
 
-        public DbSet<Customer> Customers { get; set; }
-        public DbSet<Account> Accounts { get; set; }
-        public DbSet<Purchase> Purchases { get; set; }
+        public CrayonDbContext() : base()
+        {
+
+        }
+
+        public virtual DbSet<Customer> Customers { get; set; }
+        public virtual DbSet<Account> Accounts { get; set; }
+        public virtual DbSet<Purchase> Purchases { get; set; }
 
     }
 }

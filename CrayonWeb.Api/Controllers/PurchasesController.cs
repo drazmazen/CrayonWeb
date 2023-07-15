@@ -112,7 +112,7 @@ namespace CrayonWeb.Api.Controllers
         }
 
         [Route("{id}/quantity")]
-        [HttpPost]
+        [HttpPut]
         public async Task<ActionResult> ChangeQuantity(int id, [FromBody]int newQuantity)
         {
             try
@@ -150,7 +150,7 @@ namespace CrayonWeb.Api.Controllers
         }
 
         [Route("{id}/extend")]
-        [HttpPost]
+        [HttpPut]
         public async Task<ActionResult> ExtendLicense(int id, [FromBody]DateTime validTo)
         {
             try

@@ -8,7 +8,6 @@ namespace CrayonWeb.Api.CCP
     public class CcpClientProd : ICcpClient
     {
         private readonly IHttpClientFactory _httpClientFactory;
-        private readonly IConfiguration _configuration;
         private readonly string _baseAddress;
         private readonly string _cancelSoftwareEndpoint;
         private readonly string _changeQuantityEndpoint;
@@ -19,7 +18,6 @@ namespace CrayonWeb.Api.CCP
 
         public CcpClientProd(IConfiguration configuration, IHttpClientFactory httpClientFactory)
         {
-            _configuration = configuration;
             _httpClientFactory = httpClientFactory;            
             _baseAddress = configuration["Ccp:BaseAddress"];
             _cancelSoftwareEndpoint = configuration["Ccp:CancelSoftwareEndpoint"];

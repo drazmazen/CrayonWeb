@@ -100,7 +100,7 @@ namespace CrayonWeb.Api.Controllers
                 }
                 else
                 {
-                    return BadRequest("Cancelation denied by CCP");
+                    return BadRequest("Cancellation denied by CCP");
                 }
 
             }
